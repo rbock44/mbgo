@@ -1,9 +1,9 @@
 # mbgo
-Mountebank preprocessor to generate data for a single JSON imposter post to mountebank server.
+Mountebank preprocessor to generate data for a single JSON imposter post to the mountebank server.
 
-Mountebank http://www.mbtest.org/ is a real cool HTTP mock which supports Java Script as a mighty simulation language. Mountebank supports configuration files which do allow more human readable format. The configuration files are limited for those who deploy Mountebank and the test scripts local. But when you want to control Mountebank remotely through some test clients you need to stick to some really crazy JSON style content.
+Mountebank http://www.mbtest.org/ is a real cool HTTP mock which supports Java Script as a mighty simulation language. Mountebank supports configuration files which do allow more human readable format, but the configuration files are limited for those who deploy Mountebank and the test scripts locally. When you want to control Mountebank remotely through some test clients or simple CURL you need to stick to some really crazy JSON style post data.
 
-To make my life easier deploying Mountebank with the application server and running the test suites on Jenkins I came up with a small GOLANG tool that adds some preprocessing capabilities.
+To make my life easier deploying Mountebank locally to an application server host, but running the test suites on a separate Jenkins host, I came up with a small GOLANG tool that adds some preprocessing capabilities for the Mountebank POST data.
 
 Let us start with a Mountebank imposter POST request JSON body. Instead of adding all required information we use the macro INCLUDE.
 
@@ -28,7 +28,7 @@ Let us start with a Mountebank imposter POST request JSON body. Instead of addin
 
 The sample sets up a risk engine web service that evaluates the risk for a certain customer transaction.
 
-The web service uses XML content and needs some java script logic to take over some tags from the request to the response and generate a random response id.
+The web service uses XML content and uses some java script logic to take over some tags from the request to the response and generate a random response id.
 
 The xml file can be written in a readable format:
 
@@ -71,18 +71,15 @@ function(request, response) {
 }
 ```
 
-Now when you run mbgo in the test folder the generates an mb.json that contains all the content json encoded.
+Now when you run mbgo in the test folder it generates an mb.json file that contains all the content in escaped json format.
 
-you just need to use e.g. curl to POST the data with @mb.json.
+It is enough to just use CURL to post the data @mb.json.
 
-The upload.sh in test shows the registration of the mock and the run of three different requests.
+The sample test script upload.sh in the test folder shows the registration of the mock and the run of three different requests.
 
 
 To build mbgo you just need to checkout my repository and run "go install"
 
-To run the test you need to isntall mountebank on your machine and run in with "mb --allowInjection".
+To run the test you need to install mountebank on your machine and run in with "mb --allowInjection".
 
 For the use in some secure environments I would use iptable to restrict mountebank to certain ports and also create an own mountebank user with no rights.
-
-
-
