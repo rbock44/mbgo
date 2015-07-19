@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<risk-response>
+	<application>
+		$RESPONSE_ID
+		$REQUEST_ID
+	</application>
+	<decision>
+		<return-code>0</return-code>
+		<return-message>Successful system entry</return-message>
+	</decision>
+	<verifications>
+		<fraud-verification>
+			<return-code>0</return-code>
+			<return-message>Successful system entry</return-message>
+			<intercept>0</intercept>
+			<reason-code>0</reason-code>
+			<reason-message/>
+		</fraud-verification>
+	</verifications>
+</risk-response>

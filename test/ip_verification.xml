@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<risk-response>
+	<application>
+		$RESPONSE_ID
+		$REQUEST_ID
+	</application>
+	<decision>
+		<return-code>0</return-code>
+		<return-message>Successful system entry.</return-message>
+	</decision>
+	<verifications>
+		<ip-verification>
+			<return-code>0</return-code>
+			<return-message>Successful system entry.</return-message>
+			<country>DE</country>
+			<country-confidence-factor>99</country-confidence-factor>
+			$IPADDRESS
+		</ip-verification>
+	</verifications>
+</risk-response>

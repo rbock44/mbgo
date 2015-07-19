@@ -1,0 +1,41 @@
+{
+	"port": 9005,
+	"protocol": "http",
+	"stubs": [{
+		"responses": [{
+			"is": {	"statusCode": 200, "headers": { "Content-Type": "application/xml" }, "body": "INCLUDE=./ip_verification.xml" },
+           		"_behaviors": { "decorate": "INCLUDE=./risk.js" }
+       		}],
+        	"predicates": [{
+			"and": [ 
+            			{ "equals": { "path": "/risk/verify", "method": "POST", "headers": { "Content-Type": "application/xml" } } },
+				{ "contains": { "body": "<ip-address>" } }
+			]
+        	}]
+    	},
+	{
+        	"responses": [{
+            		"is": { "statusCode": 200, "headers": {	"Content-Type": "application/xml" }, "body": "INCLUDE=./topup.xml" },
+           		"_behaviors": { "decorate": "INCLUDE=./risk.js" }
+       		}],
+        	"predicates": [{
+			"and": [
+            			{ "equals": { "path": "/risk/verify", "method": "POST", "headers": { "Content-Type": "application/xml" } } },
+				{ "contains": { "body": "<paymentMethod>" } }
+			]
+        	}]
+	},
+    	{
+        	"responses": [{
+            		"is": { "statusCode": 200, "headers": { "Content-Type": "application/xml" }, "body": "INCLUDE=./creditcard_check.xml" },
+			"_behaviors": {	"decorate": "INCLUDE=./risk.js" }
+       		}],
+        	"predicates": [{
+			"and": [ 
+            			{ "equals": { "path": "/risk/verify", "method": "POST", "headers": { "Content-Type": "application/xml" } } },
+				{ "contains": { "body": "<credit-limit>" } }
+            		]
+        	}]
+    	}]
+}
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<risk-response>
+    <application>
+        $RESPONSE_ID
+        $REQUEST_ID
+    </application>
+    <decision>
+        <return-code>0</return-code>
+        <return-message>Successful system entry.</return-message>
+    </decision>
+    <verifications>
+        <credit-risk-verification>
+            <return-code>0</return-code>
+            <return-message>Successful system entry.</return-message>
+            <score>948</score>
+            <score-class-code>3</score-class-code>
+            <score-range-code>5</score-range-code>
+        </credit-risk-verification>
+        <credit-limit-verification>
+            <return-code>0</return-code>
+            <return-message>Successful system entry.</return-message>
+            <credit-limit-code>A</credit-limit-code>
+            <credit-limit-amount currency="EUR">15000</credit-limit-amount>
+        </credit-limit-verification>
+    </verifications>
+</risk-response>
